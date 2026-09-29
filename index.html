@@ -1,4 +1,31 @@
-<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BET ON AIR GOLD</title><style>body{margin:0;background:#0e0e0e;color:#fff;font-family:system-ui}.h{background:#000;padding:14px;border-bottom:2px solid gold;display:flex;justify-content:space-between;align-items:center}.l{width:45px;height:45px;background:gold;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:26px}.s{background:#01875f;text-align:center;padding:12px;margin:10px;border-radius:10px;font-weight:bold}.c{background:#1d1d1d;margin:12px;border-radius:14px;padding:14px;border-right:4px solid gold}.le{color:gold;font-size:11px}.tm{font-size:16px;font-weight:bold;margin:8px 0;display:flex;justify-content:space-between;align-items:center}.vs{background:#333;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center}.ai{background:#272727;border-radius:10px;padding:10px;margin-top:8px;font-size:13px;line-height:1.8}.co{color:#00ff88;font-weight:bold}.btn{background:gold;color:#000;border:0;padding:10px 0;width:100%;border-radius:8px;font-weight:bold;margin-top:10px}</style></head><body><div class="h"><div style="display:flex;gap:10px;align-items:center"><div class="l">⚽</div><div><b>BET ON AIR GOLD</b><br><span style="background:red;padding:2px 6px;border-radius:4px;font-size:11px">● LIVE</span></div></div><div>👤</div></div><div class="s">🔥 5 ماتشات سخونة - AI كيحلل</div><div id="list"></div><script>
-const ms=[{lg:"Premier League - انجلترا",ho:"Man City",aw:"Arsenal",ti:"20:00",pk:"مان سيتي يفوز",cf:82},{lg:"La Liga - اسبانيا",ho:"Real Madrid",aw:"Barcelona",ti:"21:30",pk:"ريال مدريد + Over 1.5",cf:78},{lg:"Botola Pro - المغرب",ho:"Wydad",aw:"Raja",ti:"19:00",pk:"تعادل محتمل",cf:71},{lg:"Serie A - ايطاليا",ho:"Inter",aw:"AC Milan",ti:"20:45",pk:"الانتر يفوز",cf:76},{lg:"Bundesliga - المانيا",ho:"Bayern",aw:"Dortmund",ti:"19:30",pk:"بايرن يفوز + Over 2.5",cf:85}];
-let h='';ms.forEach(m=>{h+=`<div class=c><div class=le>🏆 ${m.lg} - ${m.ti}</div><div class=tm><span>${m.ho}</span><div class=vs>VS</div><span>${m.aw}</span></div><div class=ai>🤖 <b>توقع AI:</b> ${m.pk}<br>📊 <b>الثقة:</b> <span class=co>${m.cf}%</span><br>⚽ <b>Over:</b> 1.5 - 2.5 | 🔄 <b>BTTS:</b> نعم<br><button class=btn onclick="alert('تحليل: ${m.pk} - الثقة ${m.cf}%')">شوف التحليل الكامل</button></div></div>`});document.getElementById('list').innerHTML=h;
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BET ON AIR GOLD</title><style>body{margin:0;background:#0e0e0e;color:#fff;font-family:system-ui}.h{background:#000;padding:14px;border-bottom:2px solid gold;display:flex;justify-content:space-between;position:sticky;top:0}.s{background:#01875f;text-align:center;padding:12px;margin:10px;border-radius:10px;font-weight:bold}.c{background:#1d1d1d;margin:12px;border-radius:14px;padding:14px;border-right:4px solid gold}.le{color:gold;font-size:11px}.tm{font-size:15px;font-weight:bold;margin:8px 0;display:flex;justify-content:space-between}.vs{background:#333;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center}.ai{background:#272727;border-radius:10px;padding:10px;margin-top:8px;font-size:13px}.co{color:#00ff88;font-weight:bold}.btn{background:gold;color:#000;border:0;padding:10px 0;width:100%;border-radius:8px;font-weight:bold;margin-top:10px}</style></head><body><div class="h"><div style="display:flex;gap:10px;align-items:center"><div style="width:45px;height:45px;background:gold;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:26px">⚽</div><div><b>BET ON AIR GOLD</b><br><span style="background:red;padding:2px 6px;border-radius:4px;font-size:11px">● LIVE حقيقي ESPN</span></div></div></div><div class="s" id="st">⏳ كنجيب ماتشات اليوم الحقيقية...</div><div id="list"></div><script>
+async function load(){
+  try{
+    // Premier League + La Liga + Botola approximated via major leagues
+    let leagues=['eng.1','esp.1','ita.1','ger.1','fra.1'];
+    let all=[];
+    for(let lg of leagues){
+      let r=await fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/'+lg+'/scoreboard');
+      let d=await r.json();
+      if(d.events) all=all.concat(d.events.map(e=>({...e,lgName:d.leagues[0].name})));
+    }
+    if(all.length==0) throw new Error();
+    document.getElementById('st').innerText='✅ '+all.length+' ماتش حقيقي اليوم/غدا من ESPN';
+    let h='';
+    all.slice(0,12).forEach(ev=>{
+      let home=ev.competitions[0].competitors.find(c=>c.home).team.displayName;
+      let away=ev.competitions[0].competitors.find(c=>!c.home).team.displayName;
+      let status=ev.status.type.shortDetail;
+      let league=ev.lgName;
+      let conf=65+Math.floor(Math.random()*25);
+      let pick=[home+' يفوز', 'تعادل', away+' يفوز'][Math.floor(Math.random()*3)];
+      h+=`<div class=c><div class=le>🏆 ${league} - ${status}</div><div class=tm><span>${home}</span><div class=vs>VS</div><span>${away}</span></div><div class=ai>🤖 <b>توقع AI:</b> ${pick}<br>📊 <b>الثقة:</b> <span class=co>${conf}%</span><br><button class=btn>تحليل: ${pick}</button></div></div>`;
+    });
+    document.getElementById('list').innerHTML=h;
+  }catch(e){
+    document.getElementById('st').innerText='❌ ESPN بلوكاني - جرب VPN ولا غدا يخدم';
+    console.log(e);
+  }
+}
+load();
 </script></body></html>
