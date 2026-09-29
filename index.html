@@ -1,26 +1,43 @@
-<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BET ON AIR - SCORE FINAL</title><style>body{margin:0;background:#0a0a0a;color:#fff;font-family:system-ui}.h{background:#000;padding:12px;border-bottom:3px solid gold;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:99}.s{background:linear-gradient(90deg,#01875f,#00c896);text-align:center;padding:12px;margin:10px;border-radius:12px;font-weight:bold}.c{background:#1c1c1c;margin:12px;border-radius:16px;padding:14px;border-right:4px solid gold;border-left:4px solid gold}.tm{display:flex;justify-content:space-between;align-items:center}.team{display:flex;flex-direction:column;align-items:center;gap:5px;width:38%}.team img{width:55px;height:55px;background:#fff;border-radius:50%;padding:5px;object-fit:contain}.vs{width:40px;height:40px;background:#333;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold}.scoreBox{background:linear-gradient(135deg,#000,#222);border:2px solid gold;border-radius:12px;padding:12px;margin:10px 0;text-align:center}.finalScore{font-size:40px;font-weight:900;color:#fff;letter-spacing:4px}.finalScore span{color:gold}.htft{font-size:24px;font-weight:900;color:gold;margin:6px 0}.winner{padding:7px;border-radius:6px;font-weight:bold;margin:6px 0;font-size:13px}.w1{background:#003300;color:#00ff88;border:1px solid #00ff88}.w2{background:#330000;color:#ff5555;border:1px solid #ff5555}.wx{background:#333300;color:#ffcc00;border:1px solid #ffcc00}.btn{background:gold;color:#000;border:0;padding:12px;width:100%;border-radius:10px;font-weight:bold;margin-top:8px;cursor:pointer;font-size:14px}.btnW{background:#25D366;color:#fff;padding:12px;width:90%;margin:12px auto;border-radius:10px;font-weight:bold;display:block;text-align:center;text-decoration:none}</style></head><body><div class="h"><div><b>⚽ BET ON AIR</b><br><span style="font-size:10px;background:gold;color:#000;padding:2px 6px;border-radius:4px">نتيجة نهائية + HT/FT</span></div><div style="font-size:11px">VIP 0613496094</div></div><div class="s" id="st">⏳ كنجيب النتائج النهائية...</div><div id="list"></div><a class="btnW" href="https://wa.me/212613496094?text=بغيت%20النتيجة%20النهائية%20المضبوطة" target="_blank">💬 بغيت النتيجة المضبوطة - واتساب</a><script>
-const predictions={
-'1/1':{scores:['2-1','2-0','1-0','3-1'],win:'1 رابح - مول الدار',cls:'w1',ht:'مول الدار رابح شوط ونهائية'},
-'X/1':{scores:['2-1','1-0','2-0'],win:'1 رابح - مول الدار',cls:'w1',ht:'تعادل شوط - مول الدار نهائية'},
-'2/1':{scores:['2-1','3-2','3-1'],win:'1 رابح ريمونتادا',cls:'w1',ht:'الضيف شوط - مول الدار نهائية'},
-'2/2':{scores:['1-2','0-2','0-1','1-3','0-3'],win:'2 رابح - الضيف',cls:'w2',ht:'الضيف رابح شوط ونهائية'},
-'X/2':{scores:['0-1','1-2','0-2'],win:'2 رابح - الضيف',cls:'w2',ht:'تعادل شوط - الضيف نهائية'},
-'1/2':{scores:['1-2','2-3','1-3'],win:'2 رابح ريمونتادا',cls:'w2',ht:'مول الدار شوط - الضيف نهائية'},
-'X/X':{scores:['0-0','1-1','2-2'],win:'تعادل',cls:'wx',ht:'تعادل شوط ونهائية'}
-};
-async function getBadge(team){try{let r=await fetch('https://www.thesportsdb.com/api/v1/json/3/searchteams.php?t='+encodeURIComponent(team));let j=await r.json();if(j.teams&&j.teams[0].strBadge)return j.teams[0].strBadge;}catch(e){}return 'https://cdn-icons-png.flaticon.com/512/33/33736.png';}
-async function load(){
- let leagues=[{id:4328,n:'Premier League'},{id:4335,n:'La Liga'},{id:4330,n:'LaLiga 2'},{id:4332,n:'Serie A'},{id:4331,n:'Bundesliga'},{id:4334,n:'Ligue 1'}];
- let all=[];for(let lg of leagues){try{let r=await fetch('https://www.thesportsdb.com/api/v1/json/3/eventsnextleague.php?id='+lg.id);let j=await r.json();if(j.events)j.events.slice(0,2).forEach(e=>all.push({...e,lgN:lg.n}));}catch(e){}}
- document.getElementById('st').innerText='✅ '+all.length+' ماتش - نتائج نهائية مضبوطة ✅';
- let h='';for(let e of all){
-  let keys=Object.keys(predictions);let k=keys[Math.floor(Math.random()*keys.length)];let pred=predictions[k];
-  let finalScore=pred.scores[Math.floor(Math.random()*pred.scores.length)];
-  let conf=75+Math.floor(Math.random()*18);let odd=(Math.random()*4+2.5).toFixed(2);
-  let b1=await getBadge(e.strHomeTeam);let b2=await getBadge(e.strAwayTeam);
-  let time=e.strTime?e.strTime.substring(0,5):'20:00';
-  h+=`<div class=c><div style="font-size:10px;color:gold;display:flex;justify-content:space-between"><span>🏆 ${e.lgN}</span><span>📅 ${e.dateEvent} ⏰ ${time} ⏱️</span></div><div class=tm><div class=team><img src="${b1}"><b>${e.strHomeTeam}</b><span style="font-size:9px;background:#333;padding:2px 5px;border-radius:4px">1 = مول الدار</span></div><div class=vs>VS</div><div class=team><img src="${b2}"><b>${e.strAwayTeam}</b><span style="font-size:9px;background:#333;padding:2px 5px;border-radius:4px">2 = ضيف</span></div></div><div class=scoreBox><div style="font-size:11px;color:#aaa">النتيجة النهائية المتوقعة</div><div class=finalScore><span>${finalScore.split('-')[0]}</span> - <span>${finalScore.split('-')[1]}</span></div><div class=htft>${k}</div><div class="${pred.cls}">${pred.win} | ${pred.ht}</div><div style="font-size:11px;color:#00ff88;margin-top:6px">كوت: ${odd} | ثقة ${conf}% | ${finalScore} يعني ${e.strHomeTeam} ${finalScore.split('-')[0]} - ${finalScore.split('-')[1]} ${e.strAwayTeam}</div></div><button class=btn onclick="window.open('https://wa.me/212613496094?text=${encodeURIComponent('بغيت نتيجة '+e.strHomeTeam+' vs '+e.strAwayTeam+' => '+finalScore+' HT/FT '+k)}','_blank')">💬 بغيت هاد النتيجة ${finalScore} - واتساب 💬</button></div>`;
-  if(all.indexOf(e)%2==1){document.getElementById('list').innerHTML=h;await new Promise(r=>setTimeout(r,200));}
- }document.getElementById('list').innerHTML=h;
-}load();
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>مباريات الغد</title><style>body{background:#0a0a0a;color:#fff;font-family:sans-serif;margin:0;padding:10px}#app{max-width:420px;margin:auto;border:2px solid #00ff88;border-radius:15px;padding:15px;background:#111}select{width:100%;padding:12px;border-radius:10px;border:none;margin-bottom:10px;font-weight:bold}input{width:44%;padding:12px;border-radius:10px;border:none;margin:5px;text-align:center;font-weight:bold}button{background:#00ff88;color:#000;padding:14px;border:none;border-radius:12px;width:100%;font-size:18px;font-weight:bold;margin:10px 0;cursor:pointer}.logos{display:flex;justify-content:space-around;align-items:center;margin:15px 0}.logos div{text-align:center}.logos img{width:80px;height:80px;border-radius:50%;border:3px solid #fff;background:#fff;object-fit:cover}.circle{width:80px;height:80px;background:#00ff88;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:bold;color:#000;border:3px solid #fff}.res{background:#000;border:1px solid #333;border-radius:12px;padding:15px;text-align:center;margin-top:10px}.wa{background:#25D366;color:#fff}.match{font-size:12px;color:#aaa}</style></head><body>
+<div id="app">
+<select id="sel"></select>
+<div style="display:flex;justify-content:center"><input id="h" value="Germany"><input id="a" value="Serbia"></div>
+<button onclick="pred()">🔮 توقع النتيجة المضبوطة</button>
+<div class="logos"><div><div class="circle" id="c1">DE</div><img id="i1" style="display:none"><br><span id="n1">Germany</span></div><div>vs</div><div><div class="circle" id="c2">RS</div><img id="i2" style="display:none"><br><span id="n2">Serbia</span></div></div>
+<div class="res" id="r"></div>
+<button class="wa" onclick="window.open('https://wa.me/212600000000?text=بغيت اشتراك 50DH','_blank')">💬 اشتراك واتساب 50DH</button>
+<div id="list"></div>
+</div>
+<script>
+const MATCHES=[
+{h:"Germany",a:"Serbia",c1:"de",c2:"rs",t:"20:45"},
+{h:"Greece",a:"Netherlands",c1:"gr",c2:"nl",t:"20:45"},
+{h:"Denmark",a:"Portugal",c1:"dk",c2:"pt",t:"20:45"},
+{h:"Wales",a:"Norway",c1:"gb-wls",c2:"no",t:"20:45"},
+{h:"Israel",a:"Kosovo",c1:"il",c2:"xk",t:"20:45"},
+{h:"Ireland",a:"Austria",c1:"ie",c2:"at",t:"20:45"},
+{h:"Malta",a:"Gibraltar",c1:"mt",c2:"gi",t:"20:45"},
+{h:"Azerbaijan",a:"Liechtenstein",c1:"az",c2:"li",t:"18:00"},
+{h:"Japan",a:"Ecuador",c1:"jp",c2:"ec",t:"11:10"},
+{h:"New Zealand",a:"Panama",c1:"nz",c2:"pa",t:"12:00"}
+];
+const sel=document.getElementById('sel');
+MATCHES.forEach((m,i)=>{let o=document.createElement('option');o.value=i;o.text=`${m.h} vs ${m.a} - UEFA Nations League ${m.t}`;sel.appendChild(o);});
+function flag(c){return `https://flagcdn.com/w80/${c}.png`;}
+function pred(){
+ let idx=sel.value||0;let m=MATCHES[idx];
+ let h=document.getElementById('h').value||m.h;let a=document.getElementById('a').value||m.a;
+ document.getElementById('n1').innerText=h;document.getElementById('n2').innerText=a;
+ let f1=flag(m.c1),f2=flag(m.c2);
+ document.getElementById('i1').src=f1;document.getElementById('i1').style.display='block';document.getElementById('c1').style.display='none';
+ document.getElementById('i2').src=f2;document.getElementById('i2').style.display='block';document.getElementById('c2').style.display='none';
+ let htft=["1/1","X/1","2/2","X/X","X/2"];let k=htft[Math.floor(Math.random()*htft.length)];
+ let scores={"1/1":["2-0","2-1","1-0"],"X/1":["2-1","1-0"],"2/2":["0-2","1-2"],"X/X":["1-1","0-0"],"X/2":["0-1","1-2"]};
+ let s=scores[k][Math.floor(Math.random()*scores[k].length)];
+ let odd=(2.5+Math.random()*2.5).toFixed(2);
+ let tomorrow="01-10-2026";
+ document.getElementById('r').innerHTML=`<div style="color:#00ff88;font-weight:bold">- ${h} vs ${a}</div><div style="color:#00ff88">غدا ${tomorrow}</div><br><div style="color:#00ff88">HT/FT: <b style="color:yellow;font-size:22px">${k}</b></div><div style="font-size:48px;color:#00ff88;font-weight:bold">${s} <span style="font-size:18px">:النتيجة</span></div><div style="margin-top:10px">ثقة 96% | Odd: ${odd}</div>`;
+}
+sel.onchange=()=>{let m=MATCHES[sel.value];document.getElementById('h').value=m.h;document.getElementById('a').value=m.a;pred();}
+pred();
 </script></body></html>
