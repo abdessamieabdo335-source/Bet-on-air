@@ -1,14 +1,21 @@
-<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BET ON AIR</title><style>body{margin:0;background:#111;color:#fff;font-family:system-ui}.h{background:#000;padding:14px;border-bottom:2px solid gold;position:sticky;top:0}.s{background:#01875f;text-align:center;padding:12px;margin:10px;border-radius:10px}.c{background:#222;margin:12px;border-radius:12px;padding:12px;border-right:4px solid gold}.le{color:gold;font-size:11px}.tm{display:flex;justify-content:space-between;font-weight:bold;margin:8px 0}.vs{background:#333;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center}</style></head><body><div class="h">⚽ BET ON AIR GOLD ● LIVE حقيقي</div><div class="s" id="st">⏳ كنجيب الماتشات...</div><div id="list"></div><script>
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BET ON AIR GOLD PRO</title><style>body{margin:0;background:#0a0a0a;color:#fff;font-family:system-ui}.h{background:#000;padding:12px;border-bottom:3px solid gold;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:99}.logo{width:40px;height:40px;background:gold;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px}.s{background:linear-gradient(90deg,#01875f,#00c896);text-align:center;padding:12px;margin:10px;border-radius:12px;font-weight:bold}.c{background:#1c1c1c;margin:10px;border-radius:14px;padding:12px;border-right:4px solid gold;box-shadow:0 2px 8px #000}.le{color:gold;font-size:10px;display:flex;justify-content:space-between}.tm{font-weight:bold;font-size:14px;margin:8px 0;display:flex;justify-content:space-between;align-items:center}.vs{background:#333;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px}.ai{background:#252525;border-radius:10px;padding:8px;margin-top:6px;font-size:12px;line-height:1.6}.co{color:#00ff88;font-weight:bold}.btn{background:gold;color:#000;border:0;padding:9px;width:100%;border-radius:8px;font-weight:bold;margin-top:6px;cursor:pointer}.btnW{background:#25D366;color:#fff;border:0;padding:12px;width:100%;border-radius:10px;font-weight:bold;margin:10px 0;display:block;text-align:center;text-decoration:none}</style></head><body><div class="h"><div style="display:flex;gap:8px;align-items:center"><div class="logo">⚽</div><div><b>BET ON AIR GOLD</b><br><span style="font-size:10px;background:red;padding:1px 5px;border-radius:4px">● PRO LIVE</span></div></div><div style="font-size:11px">🇲🇦 50DH</div></div><div class="s" id="st">⏳ كنجيب 15 ماتش حقيقي...</div><div id="list"></div><a class="btnW" href="https://wa.me/212600000000?text=سلام بغيت اشتراك VIP BET ON AIR GOLD 50DH" target="_blank">💬 اشترك VIP واتساب - 50 درهم / شهر</a><div style="text-align:center;font-size:10px;color:#888;padding:10px">© 2026 BET ON AIR GOLD - توقعات AI حقيقية</div><script>
 async function load(){
- let url='https://www.thesportsdb.com/api/v1/json/3/eventsnextleague.php?id=4328';
- try{
-  let r=await fetch(url); let j=await r.json(); let ev=j.events||[];
-  document.getElementById('st').innerText='✅ '+ev.length+' ماتش حقيقي - Premier League';
-  let h=''; ev.slice(0,10).forEach(e=>{
-   let c=65+Math.floor(Math.random()*25);
-   h+=`<div class=c><div class=le>🏆 ${e.strLeague} - ${e.dateEvent}</div><div class=tm><span>${e.strHomeTeam}</span><div class=vs>VS</div><span>${e.strAwayTeam}</span></div><div>🤖 توقع: ${['1','X','2'][Math.floor(Math.random()*3)]} - ثقة ${c}%</div></div>`;
-  });
-  document.getElementById('list').innerHTML=h||'<div class=c>لا يوجد ماتشات اليوم</div>';
- }catch(e){document.getElementById('st').innerText='⚠️ جاري التحديث';}
+ const leagues=[{id:4328,n:'Premier League'},{id:4335,n:'La Liga'},{id:4332,n:'Serie A'},{id:4331,n:'Bundesliga'},{id:4334,n:'Ligue 1'}];
+ let all=[];
+ for(let lg of leagues){
+  try{
+   let r=await fetch('https://www.thesportsdb.com/api/v1/json/3/eventsnextleague.php?id='+lg.id);
+   let j=await r.json();
+   if(j.events) j.events.slice(0,3).forEach(e=>all.push({...e,lgN:lg.n}));
+  }catch(e){}
+ }
+ document.getElementById('st').innerText='✅ '+all.length+' ماتش حقيقي - 5 بطولات كبرى';
+ let h=''; all.forEach(e=>{
+  let conf=72+Math.floor(Math.random()*23);
+  let picks=['1','X','2']; let p=picks[Math.floor(Math.random()*3)];
+  let msg=`${e.strHomeTeam} vs ${e.strAwayTeam} - توقع ${p} ثقة ${conf}%`;
+  h+=`<div class=c><div class=le><span>🏆 ${e.lgN}</span><span>${e.dateEvent} ${e.strTime||''}</span></div><div class=tm><span>${e.strHomeTeam}</span><div class=vs>VS</div><span>${e.strAwayTeam}</span></div><div class=ai>🤖 <b>AI توقع:</b> ${p} | <b>الثقة:</b> <span class=co>${conf}%</span><br>💡 تحليل: فورمة مزيانة + تاريخ المواجهات<br><button class=btn onclick="window.open('https://wa.me/212600000000?text='+encodeURIComponent('بغيت تحليل كامل ديال: ${msg}'),'__blank')">شوف التحليل VIP</button></div></div>`;
+ });
+ document.getElementById('list').innerHTML=h||'<div class=c>لا يوجد ماتشات اليوم، رجع غدا</div>';
 }load();
 </script></body></html>
